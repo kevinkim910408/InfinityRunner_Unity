@@ -5,9 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    // components
     private CharacterController controller;
 
-    [SerializeField] float moveSpeed = 5.0f;
+
+    [Header("Stats")]
+    [SerializeField] float moveSpeed = 10.0f;
+
+    private Vector3 moveVector = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +23,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        controller.Move(Vector3.forward * moveSpeed *Time.deltaTime);
+        PlayerMovement();
+    }
+
+
+    public void PlayerMovement()
+    {
+        // move left and right
+        moveVector.x = Input.GetAxisRaw("Horizontal") * moveSpeed;
+
+
+        // move up and down - jump
+
+
+        // speed
+        moveVector.z = moveSpeed;
+
+        controller.Move(moveVector * Time.deltaTime);
     }
 }
