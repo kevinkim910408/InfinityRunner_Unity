@@ -16,11 +16,6 @@ public class PlayerController : MonoBehaviour
     // boolean
     private bool isJumpig = false;
 
-
-    // layer
-    
-
-
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
