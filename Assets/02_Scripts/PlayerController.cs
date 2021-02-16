@@ -5,52 +5,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    // components
-    private CharacterController controller;
+    //components
+    public Rigidbody rigid;
 
-    [Header("Stats")]
-    [SerializeField] float moveSpeed = 10.0f;
-    [SerializeField] float gravity = 9.8f;
+    [SerializeField] float moveSpeed = 5.0f;
     [SerializeField] float jumpForce = 5.0f;
 
-    
-    private float verticalVelocity = 0.0f;
-    private Vector3 moveVector = Vector3.zero;
 
-    // Initialize
-    void Start()
+    private void Start()
     {
-        controller = GetComponent<CharacterController>();
-
+        rigid = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        PlayerMovement();
-    }
-
-
-    public void PlayerMovement()
-    {
-        // give gravity, so keep feels heavy.
-        if (controller.isGrounded)
-        {
-            verticalVelocity = -0.5f;
-        }
-        else
-        {
-            verticalVelocity -= gravity * Time.deltaTime;
-        }
-
-        // move left and right
-        moveVector.x = Input.GetAxisRaw("Horizontal") * moveSpeed;
-
-        // speed
-        moveVector.z = moveSpeed;
-
-
-        controller.Move(moveVector * Time.deltaTime);
+        rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, rigid.velocity.z);
     }
 
 }
