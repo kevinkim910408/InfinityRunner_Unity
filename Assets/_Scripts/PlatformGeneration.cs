@@ -13,6 +13,9 @@ public class PlatformGeneration : MonoBehaviour
     [SerializeField] float distanceMin = 0.0f;
     [SerializeField] float distanceMax = 0.0f;
 
+    // object pool
+    public ObjectPooler objectPooler;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +33,12 @@ public class PlatformGeneration : MonoBehaviour
             
             transform.position = new Vector3(transform.position.x + distanceBetweenPlatforms, transform.position.y, transform.position.z);
 
-            Instantiate(platformPrefab, transform.position, transform.rotation);
+            //Instantiate(platformPrefab, transform.position, transform.rotation);
+
+            GameObject newPlatform = objectPooler.GetPooledObject();
+            newPlatform.transform.position = transform.position;
+            newPlatform.transform.rotation = transform.rotation;
+            newPlatform.SetActive(true);
         }
     }
 }
