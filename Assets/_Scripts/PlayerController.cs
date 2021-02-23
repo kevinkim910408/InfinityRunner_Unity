@@ -10,7 +10,13 @@ public class PlayerController : MonoBehaviour
     //components
     public Rigidbody rigid;
 
+    [Header("Speed")]
     [SerializeField] float moveSpeed = 5.0f;
+    [SerializeField] float speedMultiplier;
+    [SerializeField] float speedIncreaseMilestone;
+    [SerializeField] float speedMilestoneCount;
+
+    [Header("Jump")]
     [SerializeField] float jumpForce = 5.0f;
     [SerializeField] float jumpTimeCount;
     [SerializeField] float jumpTime;
@@ -22,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         jumpTimeCount = jumpTime;
+        speedMilestoneCount = speedIncreaseMilestone;
     }
 
     private void Update()
@@ -33,6 +40,13 @@ public class PlayerController : MonoBehaviour
 
     public void Run()
     {
+        if(transform.position.x > speedMilestoneCount)
+        {
+            speedMilestoneCount += speedIncreaseMilestone;
+            speedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
+            moveSpeed = moveSpeed * speedMultiplier;
+        }
+
         rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, rigid.velocity.z);
     }
 
