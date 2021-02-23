@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformGeneration : MonoBehaviour
 {
     [Header("Components")]
-    [SerializeField] GameObject platformPrefab = null;
+    [SerializeField] GameObject[] platformPrefab;
     [SerializeField] Transform generationPoint = null; 
 
     [Header("Platform_Distance")]
@@ -14,31 +14,65 @@ public class PlatformGeneration : MonoBehaviour
     [SerializeField] float distanceMax = 0.0f;
 
     // object pool
-    public ObjectPooler objectPooler;
+
+    [Header("RandomPlatform")]
+    public ObjectPooler[] objectPooler;
+    private int platformSelector; 
+    public float maxHeight;
+    public float minHeight;
+    private float heightChange;
+    public float maxHeightChange;
+    public Transform maxHeightPoint;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        minHeight = transform.position.y;
+        maxHeight = maxHeightPoint.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
         // so camera's x position passed the transform position, make a platform
-        if(transform.position.x < generationPoint.position.x)
+        if (transform.position.x < generationPoint.position.x)
         {
             // random distance
             distanceBetweenPlatforms = Random.Range(distanceMin, distanceMax);
-            
-            transform.position = new Vector3(transform.position.x + distanceBetweenPlatforms, transform.position.y, transform.position.z);
+            platformSelector = Random.Range(0, platformPrefab.Length);
+
+            transform.position = new Vector3(transform.position.x + distanceBetweenPlatforms, heightChange, transform.position.z);
+
+            heightChange = transform.position.y + Random.Range(maxHeightChange, -maxHeightChange);
+
+            if (heightChange < maxHeight && heightChange > transform.position.y )
+            {
+                heightChange = maxHeight;
+            }
+            else if(heightChange > minHeight && heightChange < transform.position.y)
+            {
+                heightChange = minHeight + (maxHeight * 0.5f);
+            }
+            else if(heightChange > maxHeight)
+            {
+                heightChange = maxHeight;
+            }
+            else if(heightChange < minHeight)
+            {
+                heightChange = minHeight;
+            }
+
+
 
             //Instantiate(platformPrefab, transform.position, transform.rotation);
 
-            GameObject newPlatform = objectPooler.GetPooledObject();
+
+
+            GameObject newPlatform = objectPooler[platformSelector].GetPooledObject();
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
+            
         }
     }
 }

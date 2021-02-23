@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float moveSpeed = 5.0f;
     [SerializeField] float jumpForce = 5.0f;
+    [SerializeField] float jumpTimeCount;
+    [SerializeField] float jumpTime;
 
     // boolean
     private bool isJumpig = false;
@@ -19,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        jumpTimeCount = jumpTime;
     }
 
     private void Update()
@@ -44,6 +47,19 @@ public class PlayerController : MonoBehaviour
                 isJumpig = true;
             }
         }
+        if (Input.GetKeyDown(jump))
+        {
+            if(jumpTimeCount > 0)
+            {
+                rigid.velocity = new Vector3(rigid.velocity.x, jumpForce, 0);
+                jumpTimeCount -= Time.deltaTime;
+            }
+        }
+
+        if (Input.GetKeyDown(jump))
+        {
+            jumpTimeCount = 0;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isJumpig = false;
+            jumpTimeCount = jumpTime;
         }
     }
 }
