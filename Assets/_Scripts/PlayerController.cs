@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     KeyCode jump = KeyCode.Space;
 
     //components
+    public GameManager gameManager;
     public Rigidbody rigid;
 
     [Header("Speed")]
@@ -15,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speedMultiplier;
     [SerializeField] float speedIncreaseMilestone;
     [SerializeField] float speedMilestoneCount;
+    [SerializeField] float moveSpeedStore;
+    [SerializeField] float speedMilestoneCountStore;
+    [SerializeField] float speedIncreaseMilestoneStore;
 
     [Header("Jump")]
     [SerializeField] float jumpForce = 5.0f;
@@ -29,6 +33,9 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         jumpTimeCount = jumpTime;
         speedMilestoneCount = speedIncreaseMilestone;
+        moveSpeedStore = moveSpeed;
+        speedMilestoneCountStore = speedMilestoneCount;
+        speedIncreaseMilestoneStore = speedIncreaseMilestone;
     }
 
     private void Update()
@@ -45,6 +52,12 @@ public class PlayerController : MonoBehaviour
             speedMilestoneCount += speedIncreaseMilestone;
             speedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
             moveSpeed = moveSpeed * speedMultiplier;
+
+            // max speed
+            if(moveSpeed > 30)
+            {
+                moveSpeed = 30;
+            }
         }
 
         rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, rigid.velocity.z);
@@ -82,6 +95,14 @@ public class PlayerController : MonoBehaviour
         {
             isJumpig = false;
             jumpTimeCount = jumpTime;
+        }
+
+        if (collision.gameObject.CompareTag("DeathPlane"))
+        {
+            moveSpeed = moveSpeedStore;
+            speedIncreaseMilestone = speedIncreaseMilestoneStore;
+            speedMilestoneCount  = speedMilestoneCountStore;
+            gameManager.RestartGame();
         }
     }
 }
