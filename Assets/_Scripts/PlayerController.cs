@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Jump")]
     [SerializeField] float jumpForce = 5.0f;
+    [SerializeField] float TrippleJumpForce = 10.0f;
     [SerializeField] float jumpTimeCount;
     [SerializeField] float jumpTime;
     [SerializeField] int jumpCount = 3;
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
             else if (isJumpig && jumpCount > 0)
             {
                 // rigid.velocity = new Vector3(rigid.velocity.x, jumpForce, rigid.velocity.z);
-                rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                rigid.AddForce(Vector3.up * TrippleJumpForce, ForceMode.Impulse);
                 isJumpig = true;
                 jumpCount--;
             }
