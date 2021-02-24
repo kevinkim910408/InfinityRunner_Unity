@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpForce = 5.0f;
     [SerializeField] float jumpTimeCount;
     [SerializeField] float jumpTime;
+    [SerializeField] int jumpCount = 3;
 
     // boolean
     private bool isJumpig = false;
@@ -36,6 +37,8 @@ public class PlayerController : MonoBehaviour
         moveSpeedStore = moveSpeed;
         speedMilestoneCountStore = speedMilestoneCount;
         speedIncreaseMilestoneStore = speedIncreaseMilestone;
+
+        jumpCount = 0;
     }
 
     private void Update()
@@ -67,11 +70,20 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(jump))
         {
+            // if on ground
             if (!isJumpig)
             {
                 //rigid.velocity = new Vector3(rigid.velocity.x, jumpForce, rigid.velocity.z);
                 rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isJumpig = true;
+                jumpCount--;
+            }
+            else if (isJumpig && jumpCount > 0)
+            {
+                // rigid.velocity = new Vector3(rigid.velocity.x, jumpForce, rigid.velocity.z);
+                rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                isJumpig = true;
+                jumpCount--;
             }
         }
         if (Input.GetKeyDown(jump))
@@ -93,6 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            jumpCount = 3;
             isJumpig = false;
             jumpTimeCount = jumpTime;
         }
