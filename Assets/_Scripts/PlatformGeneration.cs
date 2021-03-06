@@ -24,11 +24,15 @@ public class PlatformGeneration : MonoBehaviour
     public float maxHeightChange;
     public Transform maxHeightPoint;
 
+    CoinGenerator coinGenerator;
+
     // Start is called before the first frame update
     void Start()
     {
         minHeight = transform.position.y;
         maxHeight = maxHeightPoint.position.y;
+
+        coinGenerator = FindObjectOfType<CoinGenerator>();
     }
 
     // Update is called once per frame
@@ -72,6 +76,8 @@ public class PlatformGeneration : MonoBehaviour
             newPlatform.transform.position = transform.position;
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
+
+            coinGenerator.SpawnCoin(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z - 2.0f));
             
         }
     }
