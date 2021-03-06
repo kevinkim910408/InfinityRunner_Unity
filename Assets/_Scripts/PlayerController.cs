@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed = moveSpeedStore;
             speedIncreaseMilestone = speedIncreaseMilestoneStore;
             speedMilestoneCount  = speedMilestoneCountStore;
-            gameManager.RestartGame();
+            gameManager.LoseCondition();
         }
     }
 }
