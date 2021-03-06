@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     ScoreManager scoreManager;
     TimeManager timeManager;
 
+
     public string restartSceneName = "";
     public string menuSceneName = "";
     public GameObject losePanel = null;
