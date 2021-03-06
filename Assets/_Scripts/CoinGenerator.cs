@@ -14,11 +14,11 @@ public class CoinGenerator : MonoBehaviour
         coin.SetActive(true);
 
         GameObject coin2 = objectPooler.GetPooledObject();
-        coin.transform.position = new Vector3(startPoint.x - distanceBetweenCoins, startPoint.y, startPoint.z - distanceBetweenCoins);
-        coin.SetActive(true);
+        coin2.transform.position = new Vector3(startPoint.x - distanceBetweenCoins, startPoint.y, startPoint.z);
+        coin2.SetActive(true);
 
         GameObject coin3 = objectPooler.GetPooledObject();
-        coin.transform.position = new Vector3(startPoint.x + distanceBetweenCoins, startPoint.y, startPoint.z + distanceBetweenCoins);
-        coin.SetActive(true);
+        coin3.transform.position = new Vector3(startPoint.x + distanceBetweenCoins, startPoint.y, startPoint.z);
+        coin3.SetActive(true);
     }
 }

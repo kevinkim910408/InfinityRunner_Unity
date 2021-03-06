@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 3599865070426311497, guid: b2aecd36b58394643be110345cca2a4d, type: 3}
-  pooledAmount: 15
+  pooledAmount: 30
 --- !u!1 &276487557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPooler: {fileID: 263528561}
-  distanceBetweenCoins: 2
+  distanceBetweenCoins: 1
 --- !u!1 &1057071418
 GameObject:
   m_ObjectHideFlags: 0

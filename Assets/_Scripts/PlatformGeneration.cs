@@ -26,6 +26,7 @@ public class PlatformGeneration : MonoBehaviour
 
     CoinGenerator coinGenerator;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,8 +78,8 @@ public class PlatformGeneration : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
-            coinGenerator.SpawnCoin(new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z - 2.0f));
-            
+            coinGenerator.SpawnCoin(new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z));
+
         }
     }
 }

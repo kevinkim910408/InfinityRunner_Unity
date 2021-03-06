@@ -22,7 +22,6 @@ public class ScoreManager : MonoBehaviour
     public float scoreIncreaseCount;
     public float mileIncreaseCount;
 
-
     public bool isScoreIncrease;
 
     // Start is called before the first frame update
@@ -30,9 +29,8 @@ public class ScoreManager : MonoBehaviour
     {
         isScoreIncrease = true;
 
-
         // load
-        if(PlayerPrefs.GetFloat("HighScore") != null && PlayerPrefs.GetFloat("BestMiles") != null && PlayerPrefs.GetFloat("Coins") != null)
+        if (PlayerPrefs.GetFloat("HighScore") != null && PlayerPrefs.GetFloat("BestMiles") != null && PlayerPrefs.GetFloat("Coins") != null)
         {
             highScoreCount = PlayerPrefs.GetFloat("HighScore");
             bestMilesCount = PlayerPrefs.GetFloat("BestMiles");
@@ -46,7 +44,7 @@ public class ScoreManager : MonoBehaviour
         if (isScoreIncrease)
         {
             milesCount += mileIncreaseCount * Time.deltaTime;
-            scoreCount += scoreIncreaseCount * Time.deltaTime;
+            scoreCount += (milesCount + scoreIncreaseCount) * Time.deltaTime;
         }
 
 

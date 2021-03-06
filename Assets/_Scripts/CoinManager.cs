@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
     ScoreManager scoreManager;
+    public int coinScore;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,8 @@ public class CoinManager : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             scoreManager.coinCount += 1;
+            scoreManager.scoreCount += 100;
+
             gameObject.SetActive(false);
         }
     }
