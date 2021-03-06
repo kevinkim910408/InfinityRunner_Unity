@@ -13,12 +13,14 @@ public class GameManager : MonoBehaviour
     private PlatformDestruction[] platformList;
 
     ScoreManager scoreManager;
+    TimeManager timeManager;
 
     private void Start()
     {
         platformStartPoint = platformGenerator.position;
         playerStartPoint = thePlayer.transform.position;
         scoreManager = FindObjectOfType<ScoreManager>();
+        timeManager = FindObjectOfType<TimeManager>();
     }
 
     public void RestartGame()
@@ -27,8 +29,9 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator ResatartGameCo()
     {
-        //score
+        //set false. to stop
         scoreManager.isScoreIncrease = false;
+        timeManager.isTimeDecrease = false;
 
 
         thePlayer.gameObject.SetActive(false);
@@ -45,9 +48,12 @@ public class GameManager : MonoBehaviour
         thePlayer.gameObject.SetActive(true);
 
 
-        // restart
+        // reset score and timer
         scoreManager.isScoreIncrease = true;
         scoreManager.scoreCount = 0;
+
+        timeManager.isTimeDecrease = true;
+        timeManager.currentTime = 60;
 
     }
 }

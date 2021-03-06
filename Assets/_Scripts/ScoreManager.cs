@@ -26,6 +26,8 @@ public class ScoreManager : MonoBehaviour
     {
         isScoreIncrease = true;
 
+
+        // load
         if(PlayerPrefs.GetFloat("HighScore") != null && PlayerPrefs.GetFloat("BestMiles") != null)
         {
             highScoreCount = PlayerPrefs.GetFloat("HighScore");
@@ -40,9 +42,10 @@ public class ScoreManager : MonoBehaviour
         {
             milesCount += mileIncreaseCount * Time.deltaTime;
             scoreCount += scoreIncreaseCount * Time.deltaTime;
-
         }
 
+
+        // save
         if (scoreCount > highScoreCount)
         {
             highScoreCount = scoreCount;
@@ -54,6 +57,8 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetFloat("BestMiles", bestMilesCount);
         }
 
+
+        // text edit
         scoreText.text = "SCORE: " + scoreCount.ToString("N0");
         highScoreText.text = "HIGHSCORE: " + highScoreCount.ToString("N0");
 
