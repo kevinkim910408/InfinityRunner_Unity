@@ -11,9 +11,13 @@ public class TimeManager : MonoBehaviour
 
     public bool isTimeDecrease;
 
+    GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
         isTimeDecrease = true;
         currentTime = 60f;
     }
@@ -26,8 +30,12 @@ public class TimeManager : MonoBehaviour
             currentTime -= timerDecreaseCount * Time.deltaTime;
         }
 
-
-
+        if(currentTime <= 0)
+        {
+            currentTime = 0;
+            timerText.text = "GAME OVER";
+            gameManager.LoseCondition();
+        }
 
         timerText.text = "TIME: " + currentTime.ToString("N0");
     }
