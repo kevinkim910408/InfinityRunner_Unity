@@ -9,11 +9,15 @@ public class ScoreManager : MonoBehaviour
     public Text highScoreText = null;
     public Text milesText = null;
     public Text bestMilesText = null;
+    public Text coinText = null;
+    public Text bestCoinText = null;
 
     public float scoreCount;
     public float highScoreCount;
     public float milesCount;
     public float bestMilesCount;
+    public float coinCount;
+    public float bestCoinCount;
 
     public float scoreIncreaseCount;
     public float mileIncreaseCount;
@@ -28,10 +32,11 @@ public class ScoreManager : MonoBehaviour
 
 
         // load
-        if(PlayerPrefs.GetFloat("HighScore") != null && PlayerPrefs.GetFloat("BestMiles") != null)
+        if(PlayerPrefs.GetFloat("HighScore") != null && PlayerPrefs.GetFloat("BestMiles") != null && PlayerPrefs.GetFloat("Coins") != null)
         {
             highScoreCount = PlayerPrefs.GetFloat("HighScore");
             bestMilesCount = PlayerPrefs.GetFloat("BestMiles");
+            bestCoinCount = PlayerPrefs.GetFloat("Coins");
         }
     }
 
@@ -56,13 +61,22 @@ public class ScoreManager : MonoBehaviour
             bestMilesCount = milesCount;
             PlayerPrefs.SetFloat("BestMiles", bestMilesCount);
         }
+        if (coinCount > bestCoinCount)
+        {
+            bestCoinCount = coinCount;
+            PlayerPrefs.SetFloat("Coins", bestCoinCount);
+        }
+
 
 
         // text edit
         scoreText.text = "SCORE: " + scoreCount.ToString("N0");
-        highScoreText.text = "HIGHSCORE: " + highScoreCount.ToString("N0");
+        highScoreText.text = "HIGH SCORE: " + highScoreCount.ToString("N0");
 
         milesText.text = "MILES: " + milesCount.ToString("N0");
-        bestMilesText.text = "BESTMILES: " + bestMilesCount.ToString("N0");
+        bestMilesText.text = "BEST MILES: " + bestMilesCount.ToString("N0");
+
+        coinText.text = "COINS: " + coinCount.ToString("N0");
+        bestCoinText.text = "BEST COINS: " + bestCoinCount.ToString("N0");
     }
 }
