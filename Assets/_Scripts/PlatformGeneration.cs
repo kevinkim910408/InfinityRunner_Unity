@@ -25,6 +25,7 @@ public class PlatformGeneration : MonoBehaviour
     public Transform maxHeightPoint;
 
     CoinGenerator coinGenerator;
+    HazardGenerator hazardGenerator;
 
 
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class PlatformGeneration : MonoBehaviour
         maxHeight = maxHeightPoint.position.y;
 
         coinGenerator = FindObjectOfType<CoinGenerator>();
+        hazardGenerator = FindObjectOfType<HazardGenerator>();
     }
 
     // Update is called once per frame
@@ -79,6 +81,7 @@ public class PlatformGeneration : MonoBehaviour
             newPlatform.SetActive(true);
 
             coinGenerator.SpawnCoin(new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z));
+            hazardGenerator.SpawnHazard(new Vector3(transform.position.x + 5.0f, transform.position.y + 1.0f, transform.position.z));
 
         }
     }
