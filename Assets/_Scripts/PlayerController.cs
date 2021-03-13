@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     //components
     public GameManager gameManager;
     public Rigidbody rigid;
+    Animator animator;
 
     [Header("Speed")]
     [SerializeField] float moveSpeed = 5.0f;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         moveSpeedStore = moveSpeed;
         speedMilestoneCountStore = speedMilestoneCount;
         speedIncreaseMilestoneStore = speedIncreaseMilestone;
+        animator = GetComponent<Animator>();
 
         jumpCount = 0;
     }
@@ -71,6 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(jump))
         {
+            animator.SetBool("isJump",true);
             // if on ground
             if (!isJumpig)
             {
@@ -109,6 +112,7 @@ public class PlayerController : MonoBehaviour
             jumpCount = 3;
             isJumpig = false;
             jumpTimeCount = jumpTime;
+            animator.SetBool("isJump", false);
         }
 
         if (collision.gameObject.CompareTag("DeathPlane"))
