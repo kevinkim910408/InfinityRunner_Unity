@@ -26,10 +26,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float TrippleJumpForce = 10.0f;
     [SerializeField] float jumpTimeCount;
     [SerializeField] float jumpTime;
-    [SerializeField] int jumpCount = 3;
+    [SerializeField] int jumpCount;
 
     // boolean
     private bool isJumpig = false;
+    public bool isDead;
 
     private void Start()
     {
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour
         speedIncreaseMilestoneStore = speedIncreaseMilestone;
         animator = GetComponent<Animator>();
 
-        jumpCount = 0;
+        isDead = false;
     }
 
     private void Update()
@@ -53,20 +54,23 @@ public class PlayerController : MonoBehaviour
 
     public void Run()
     {
-        if(transform.position.x > speedMilestoneCount)
+        if (!isDead)
         {
-            speedMilestoneCount += speedIncreaseMilestone;
-            speedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
-            moveSpeed = moveSpeed * speedMultiplier;
-
-            // max speed
-            if(moveSpeed > 15)
+            if (transform.position.x > speedMilestoneCount)
             {
-                moveSpeed = 15;
-            }
-        }
+                speedMilestoneCount += speedIncreaseMilestone;
+                speedIncreaseMilestone = speedIncreaseMilestone * speedMultiplier;
+                moveSpeed = moveSpeed * speedMultiplier;
 
-        rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, rigid.velocity.z);
+                // max speed
+                if (moveSpeed > 15)
+                {
+                    moveSpeed = 15;
+                }
+            }
+
+            rigid.velocity = new Vector3(moveSpeed, rigid.velocity.y, rigid.velocity.z);
+        }
     }
 
     public void Jump()
@@ -109,7 +113,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            jumpCount = 3;
+            jumpCount = 2;
             isJumpig = false;
             jumpTimeCount = jumpTime;
             animator.SetBool("isJump", false);

@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
     public PlayerController thePlayer;
     private Vector3 playerStartPoint;
 
+    Animator playerAnimator;
+    Rigidbody playerRigid;
+
     private PlatformDestruction[] platformList;
 
     ScoreManager scoreManager;
@@ -21,6 +24,8 @@ public class GameManager : MonoBehaviour
     public string menuSceneName = "";
     public GameObject losePanel = null;
 
+
+
     private void Start()
     {
         platformStartPoint = platformGenerator.position;
@@ -28,11 +33,16 @@ public class GameManager : MonoBehaviour
         scoreManager = FindObjectOfType<ScoreManager>();
         timeManager = FindObjectOfType<TimeManager>();
 
+        playerAnimator = thePlayer.GetComponent<Animator>();
+        playerRigid = thePlayer.GetComponent<Rigidbody>();
+
         losePanel.gameObject.SetActive(false);
+
     }
 
     public void RestartGame()
     {
+        thePlayer.isDead = false;
         losePanel.gameObject.SetActive(false);
 
         //set false. to stop
@@ -59,43 +69,13 @@ public class GameManager : MonoBehaviour
 
         scoreManager.isScoreIncrease = true;
         scoreManager.scoreCount = 0;
+        scoreManager.milesCount = 0;
+        scoreManager.coinCount = 0;
 
         timeManager.isTimeDecrease = true;
         timeManager.currentTime = 60;
-
-        //StartCoroutine("ResatartGameCo");
     }
-    //public IEnumerator ResatartGameCo()
-    //{
-    //    //set false. to stop
-    //    scoreManager.isScoreIncrease = false;
-    //    timeManager.isTimeDecrease = false;
-
-
-    //    thePlayer.gameObject.SetActive(false);
-    //    yield return new WaitForSeconds(0.5f);
-
-    //    platformList = FindObjectsOfType<PlatformDestruction>();
-    //    for(int i = 0; i < platformList.Length; ++i)
-    //    {
-    //        platformList[i].gameObject.SetActive(false);
-    //    }
-
-    //    thePlayer.transform.position = playerStartPoint;
-    //    platformGenerator.position = playerStartPoint;
-    //    thePlayer.gameObject.SetActive(true);
-
-
-    //    // reset score and timer
-    //    Time.timeScale = 1.0f;
-
-    //    scoreManager.isScoreIncrease = true;
-    //    scoreManager.scoreCount = 0;
-
-    //    timeManager.isTimeDecrease = true;
-    //    timeManager.currentTime = 60;
-
-    //}
+   
 
     public void GoMenu()
     {
@@ -104,6 +84,8 @@ public class GameManager : MonoBehaviour
 
     public void LoseCondition()
     {
+        thePlayer.isDead = true;
+        playerAnimator.SetBool("isDie",true);
         losePanel.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
     }
