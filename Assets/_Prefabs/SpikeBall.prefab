@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3124814128263199658}
   - component: {fileID: 6256992178076542173}
   - component: {fileID: 3833772591512692572}
+  - component: {fileID: -2025825902863449783}
   m_Layer: 0
   m_Name: SpikeBall
   m_TagString: DeathPlane
@@ -171,3 +172,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &-2025825902863449783
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804387695140462261}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1c24ee8b4c9b1f41881749adaa22d29, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

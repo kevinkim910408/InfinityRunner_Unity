@@ -32,6 +32,13 @@ public class PlayerController : MonoBehaviour
     private bool isJumpig = false;
     public bool isDead;
 
+    // Particle
+    [SerializeField] ParticleSystem jumpParticlePrefab;
+
+    // Position
+    [SerializeField] Transform jumpParticleSpawnPoint;
+    ParticleSystem jumpParticle;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -43,6 +50,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         isDead = false;
+        jumpParticle = Instantiate(jumpParticlePrefab, jumpParticleSpawnPoint.transform.position, Quaternion.identity);
     }
 
     private void Update()
@@ -77,7 +85,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(jump))
         {
+            jumpParticle.transform.position = jumpParticleSpawnPoint.transform.position;
+            jumpParticle.transform.position = jumpParticleSpawnPoint.transform.position;
+
             animator.SetBool("isJump",true);
+
+            jumpParticle.Play();
             // if on ground
             if (!isJumpig)
             {

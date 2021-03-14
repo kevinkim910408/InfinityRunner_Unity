@@ -692,13 +692,13 @@ MonoBehaviour:
 
     Avoid Hazards to Run
 
-    For
+    To
     Update New Record
 
 
     Space Key to Jump
 
-    Can Tripple Jump'
+    Can Double Jump'
 --- !u!222 &496310536
 CanvasRenderer:
   m_ObjectHideFlags: 0

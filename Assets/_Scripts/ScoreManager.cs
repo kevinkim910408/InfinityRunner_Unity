@@ -27,6 +27,7 @@ public class ScoreManager : MonoBehaviour
     // components
     PlayerController playerController;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,41 +48,38 @@ public class ScoreManager : MonoBehaviour
     {
         if (!playerController.isDead)
         {
-            if (isScoreIncrease)
-            {
-                milesCount += mileIncreaseCount * Time.deltaTime;
-                scoreCount += (milesCount + scoreIncreaseCount) * Time.deltaTime;
+                if (isScoreIncrease)
+                {
+                    milesCount += mileIncreaseCount * Time.deltaTime;
+                    scoreCount += (milesCount + scoreIncreaseCount) * Time.deltaTime;
+                }
+
+                // save
+                if (scoreCount > highScoreCount)
+                {
+                    highScoreCount = scoreCount;
+                    PlayerPrefs.SetFloat("HighScore", highScoreCount);
+                }
+                if (milesCount > bestMilesCount)
+                {
+                    bestMilesCount = milesCount;
+                    PlayerPrefs.SetFloat("BestMiles", bestMilesCount);
+                }
+                if (coinCount > bestCoinCount)
+                {
+                    bestCoinCount = coinCount;
+                    PlayerPrefs.SetFloat("Coins", bestCoinCount);
+                }
+
+                // text edit
+                scoreText.text = "SCORE: " + scoreCount.ToString("N0");
+                highScoreText.text = "HIGH SCORE: " + highScoreCount.ToString("N0");
+
+                milesText.text = "MILES: " + milesCount.ToString("N0");
+                bestMilesText.text = "BEST MILES: " + bestMilesCount.ToString("N0");
+
+                coinText.text = "COINS: " + coinCount.ToString("N0");
+                bestCoinText.text = "BEST COINS: " + bestCoinCount.ToString("N0");
             }
-
-            // save
-            if (scoreCount > highScoreCount)
-            {
-                highScoreCount = scoreCount;
-                PlayerPrefs.SetFloat("HighScore", highScoreCount);
-            }
-            if (milesCount > bestMilesCount)
-            {
-                bestMilesCount = milesCount;
-                PlayerPrefs.SetFloat("BestMiles", bestMilesCount);
-            }
-            if (coinCount > bestCoinCount)
-            {
-                bestCoinCount = coinCount;
-                PlayerPrefs.SetFloat("Coins", bestCoinCount);
-            }
-
-
-
-            // text edit
-            scoreText.text = "SCORE: " + scoreCount.ToString("N0");
-            highScoreText.text = "HIGH SCORE: " + highScoreCount.ToString("N0");
-
-            milesText.text = "MILES: " + milesCount.ToString("N0");
-            bestMilesText.text = "BEST MILES: " + bestMilesCount.ToString("N0");
-
-            coinText.text = "COINS: " + coinCount.ToString("N0");
-            bestCoinText.text = "BEST COINS: " + bestCoinCount.ToString("N0");
-        }
-       
     }
 }

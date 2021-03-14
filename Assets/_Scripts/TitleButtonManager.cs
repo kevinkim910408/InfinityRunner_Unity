@@ -46,7 +46,7 @@ public class TitleButtonManager : MonoBehaviour
 
     public void GoExit()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
 
         Application.Quit();
     }

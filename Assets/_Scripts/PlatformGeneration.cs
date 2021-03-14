@@ -26,6 +26,7 @@ public class PlatformGeneration : MonoBehaviour
 
     CoinGenerator coinGenerator;
     HazardGenerator hazardGenerator;
+    BGGenerator bGGenerator;
 
 
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class PlatformGeneration : MonoBehaviour
 
         coinGenerator = FindObjectOfType<CoinGenerator>();
         hazardGenerator = FindObjectOfType<HazardGenerator>();
+        bGGenerator = FindObjectOfType<BGGenerator>();
     }
 
     // Update is called once per frame
@@ -69,11 +71,7 @@ public class PlatformGeneration : MonoBehaviour
                 heightChange = minHeight;
             }
 
-
-
             //Instantiate(platformPrefab, transform.position, transform.rotation);
-
-
 
             GameObject newPlatform = objectPooler[platformSelector].GetPooledObject();
             newPlatform.transform.position = transform.position;
@@ -82,6 +80,7 @@ public class PlatformGeneration : MonoBehaviour
 
             coinGenerator.SpawnCoin(new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z));
             hazardGenerator.SpawnHazard(new Vector3(transform.position.x + 5.0f, transform.position.y + 1.0f, transform.position.z));
+            //bGGenerator.SpawnBG(new Vector3(transform.position.x, transform.position.y, transform.position.z));
 
         }
     }
