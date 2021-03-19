@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform jumpParticleSpawnPoint;
     ParticleSystem jumpParticle;
 
+    // sounds
+    AudioSource audioSource;
+    [SerializeField] AudioClip jumpClip = null;
+    [SerializeField] AudioClip dieClip = null;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -48,6 +53,8 @@ public class PlayerController : MonoBehaviour
         speedMilestoneCountStore = speedMilestoneCount;
         speedIncreaseMilestoneStore = speedIncreaseMilestone;
         animator = GetComponent<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
 
         isDead = false;
         jumpParticle = Instantiate(jumpParticlePrefab, jumpParticleSpawnPoint.transform.position, Quaternion.identity);
@@ -85,15 +92,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(jump))
         {
-            jumpParticle.transform.position = jumpParticleSpawnPoint.transform.position;
-            jumpParticle.transform.position = jumpParticleSpawnPoint.transform.position;
-
             animator.SetBool("isJump",true);
-
-            jumpParticle.Play();
             // if on ground
             if (!isJumpig)
             {
+                PlaySound("JUMP");
+                SpawnParticle();
                 //rigid.velocity = new Vector3(rigid.velocity.x, jumpForce, rigid.velocity.z);
                 rigid.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 isJumpig = true;
@@ -101,6 +105,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (isJumpig && jumpCount > 0)
             {
+                PlaySound("JUMP");
+                SpawnParticle();
                 // rigid.velocity = new Vector3(rigid.velocity.x, jumpForce, rigid.velocity.z);
                 rigid.AddForce(Vector3.up * TrippleJumpForce, ForceMode.Impulse);
                 isJumpig = true;
@@ -121,6 +127,27 @@ public class PlayerController : MonoBehaviour
             jumpTimeCount = 0;
         }
     }
+    public void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "JUMP":
+                audioSource.clip = jumpClip;
+                break;
+            case "DIE":
+                audioSource.clip = dieClip;
+                break;
+        }
+        audioSource.Play();
+    }
+
+    public void SpawnParticle()
+    {
+        jumpParticle.transform.position = jumpParticleSpawnPoint.transform.position;
+        jumpParticle.transform.rotation = jumpParticleSpawnPoint.transform.rotation;
+
+        jumpParticle.Play();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -134,6 +161,7 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("DeathPlane"))
         {
+            PlaySound("DIE");
             moveSpeed = moveSpeedStore;
             speedIncreaseMilestone = speedIncreaseMilestoneStore;
             speedMilestoneCount  = speedMilestoneCountStore;
