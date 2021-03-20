@@ -85,7 +85,7 @@ public class PlatformGeneration : MonoBehaviour
             hazardGenerator.SpawnHazard(new Vector3(transform.position.x + 5.0f, transform.position.y + 1.0f, transform.position.z));
 
             // item
-            itemGenerator.SpawnItem(new Vector3(transform.position.x , transform.position.y + 1.0f, transform.position.z));
+            itemGenerator.SpawnItem(new Vector3(transform.position.x , transform.position.y + 0.5f, transform.position.z));
         }
     }
 }

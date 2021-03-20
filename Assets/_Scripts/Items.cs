@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Items : MonoBehaviour
 {
+    // components
     PlayerController playerController;
     TimeManager timeManager;
+    Animator animator;
     public int rand;
 
     // sounds
@@ -20,6 +22,7 @@ public class Items : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
         timeManager = FindObjectOfType<TimeManager>();
         audioSource = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -47,10 +50,10 @@ public class Items : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
-
         if (other.gameObject.CompareTag("Player"))
         {
+            // interaction anim;
+            animator.SetBool("isInteracted", true);
             switch (rand)
             {
                 // 40%
@@ -89,5 +92,19 @@ public class Items : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine("DeactiveAnim");
+        }
+    }
+
+    IEnumerator DeactiveAnim()
+    {
+        yield return new WaitForSeconds(2.0f);
+        animator.SetBool("isInteracted", false);
     }
 }

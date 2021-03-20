@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e83b9837a120942beca74bc41e9b5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pooledObject: {fileID: 287032359761756518, guid: 2b022668927eb8047816fc81ea032f1e, type: 3}
+  pooledObject: {fileID: 8428086866094561350, guid: 401d93daa1d18fd4092c68f9d2e3761c, type: 3}
   pooledAmount: 30
 --- !u!1001 &505206222
 PrefabInstance:
@@ -1919,7 +1919,7 @@ GameObject:
   - component: {fileID: 1061396756}
   m_Layer: 0
   m_Name: CoinSFX
-  m_TagString: Untagged
+  m_TagString: CoinSFX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
