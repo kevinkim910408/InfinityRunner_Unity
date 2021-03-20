@@ -7,16 +7,13 @@ public class CoinManager : MonoBehaviour
     ScoreManager scoreManager;
     public int coinScore;
 
+    // sounds
+
     // Start is called before the first frame update
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)

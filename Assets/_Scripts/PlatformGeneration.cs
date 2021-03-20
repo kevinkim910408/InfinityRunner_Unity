@@ -26,7 +26,7 @@ public class PlatformGeneration : MonoBehaviour
 
     CoinGenerator coinGenerator;
     HazardGenerator hazardGenerator;
-    BGGenerator bGGenerator;
+    ItemGenerator itemGenerator;
 
 
     // Start is called before the first frame update
@@ -37,7 +37,7 @@ public class PlatformGeneration : MonoBehaviour
 
         coinGenerator = FindObjectOfType<CoinGenerator>();
         hazardGenerator = FindObjectOfType<HazardGenerator>();
-        bGGenerator = FindObjectOfType<BGGenerator>();
+        itemGenerator = FindObjectOfType<ItemGenerator>();
     }
 
     // Update is called once per frame
@@ -78,10 +78,14 @@ public class PlatformGeneration : MonoBehaviour
             newPlatform.transform.rotation = transform.rotation;
             newPlatform.SetActive(true);
 
+            // coin
             coinGenerator.SpawnCoin(new Vector3(transform.position.x, transform.position.y + 2.0f, transform.position.z));
-            hazardGenerator.SpawnHazard(new Vector3(transform.position.x + 5.0f, transform.position.y + 1.0f, transform.position.z));
-            //bGGenerator.SpawnBG(new Vector3(transform.position.x, transform.position.y, transform.position.z));
 
+            // hazard
+            hazardGenerator.SpawnHazard(new Vector3(transform.position.x + 5.0f, transform.position.y + 1.0f, transform.position.z));
+
+            // item
+            itemGenerator.SpawnItem(new Vector3(transform.position.x , transform.position.y + 1.0f, transform.position.z));
         }
     }
 }

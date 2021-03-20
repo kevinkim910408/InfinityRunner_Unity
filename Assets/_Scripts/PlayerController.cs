@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     Animator animator;
 
     [Header("Speed")]
-    [SerializeField] float moveSpeed = 5.0f;
+    [SerializeField] public float moveSpeed = 5.0f;
     [SerializeField] float speedMultiplier;
     [SerializeField] float speedIncreaseMilestone;
     [SerializeField] float speedMilestoneCount;
