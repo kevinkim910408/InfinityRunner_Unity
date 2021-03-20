@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3599865070426311503}
   - component: {fileID: -7060372068283471006}
   - component: {fileID: -2275037251366568146}
-  - component: {fileID: -8113988191480947990}
+  - component: {fileID: -6298831865716937881}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinScore: 0
+  coinClip: {fileID: 8300000, guid: f3d217b0e3ef2cb4dbe0b016c241bd30, type: 3}
 --- !u!114 &-7060372068283471006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &-8113988191480947990
+--- !u!82 &-6298831865716937881
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +155,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f3d217b0e3ef2cb4dbe0b016c241bd30, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

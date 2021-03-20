@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - DeathPlane
   - Coin
+  - CoinSFX
   layers:
   - Default
   - TransparentFX
