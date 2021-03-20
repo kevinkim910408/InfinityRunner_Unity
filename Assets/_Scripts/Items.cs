@@ -8,17 +8,41 @@ public class Items : MonoBehaviour
     TimeManager timeManager;
     public int rand;
 
+    // sounds
+    AudioSource audioSource;
+    [SerializeField] AudioClip speedUp = null;
+    [SerializeField] AudioClip speedDown = null;
+    [SerializeField] AudioClip timerUp = null;
+
     // Start is called before the first frame update
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
         timeManager = FindObjectOfType<TimeManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         rand = Random.Range(0, 5);
+    }
+
+    public void PlaySound(string action)
+    {
+        switch (action)
+        {
+            case "SPEEDUP":
+                audioSource.clip = speedUp;
+                break;
+            case "SPEEDDOWN":
+                audioSource.clip = speedDown;
+                break;
+            case "TIMERUP":
+                audioSource.clip = timerUp;
+                break;
+        }
+        audioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,6 +56,7 @@ public class Items : MonoBehaviour
                 // 40%
                 case 0:
                 case 1:
+                    PlaySound("SPEEDDOWN");
                     playerController.moveSpeed -= 2.0f;
                     if(playerController.moveSpeed <= 5.0f)
                     {
@@ -42,6 +67,7 @@ public class Items : MonoBehaviour
 
                     // 20%
                 case 2:
+                    PlaySound("SPEEDUP");
                     playerController.moveSpeed += 2.0f;
                     if (playerController.moveSpeed >= 15.0f)
                     {
@@ -53,6 +79,7 @@ public class Items : MonoBehaviour
                   //  40%
                 case 3:
                 case 4:
+                    PlaySound("TIMERUP");
                     timeManager.currentTime += 5.0f;
                     if(timeManager.currentTime > 60.0f)
                     {
