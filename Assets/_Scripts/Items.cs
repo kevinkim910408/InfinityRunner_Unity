@@ -8,6 +8,8 @@ public class Items : MonoBehaviour
     PlayerController playerController;
     TimeManager timeManager;
     Animator animator;
+    PopUpManager popUpManager;
+
     public int rand;
 
     // sounds
@@ -15,6 +17,7 @@ public class Items : MonoBehaviour
     [SerializeField] AudioClip speedUp = null;
     [SerializeField] AudioClip speedDown = null;
     [SerializeField] AudioClip timerUp = null;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class Items : MonoBehaviour
         timeManager = FindObjectOfType<TimeManager>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        popUpManager = FindObjectOfType<PopUpManager>();
     }
 
     // Update is called once per frame
@@ -59,6 +63,8 @@ public class Items : MonoBehaviour
                 // 40%
                 case 0:
                 case 1:
+                    popUpManager.Visible();
+                    popUpManager.popUpText.text = "Speed Down";
                     PlaySound("SPEEDDOWN");
                     playerController.moveSpeed -= 2.0f;
                     if(playerController.moveSpeed <= 5.0f)
@@ -71,10 +77,12 @@ public class Items : MonoBehaviour
                     // 20%
                 case 2:
                     PlaySound("SPEEDUP");
-                    playerController.moveSpeed += 2.0f;
-                    if (playerController.moveSpeed >= 15.0f)
+                    popUpManager.Visible();
+                    popUpManager.popUpText.text = "Speed Up";
+                    playerController.moveSpeed += 1.0f;
+                    if (playerController.moveSpeed >= 10.0f)
                     {
-                        playerController.moveSpeed = 15.0f;
+                        playerController.moveSpeed = 10.0f;
                     }
                     Debug.Log("Speed Up");
                     break;
@@ -83,6 +91,8 @@ public class Items : MonoBehaviour
                 case 3:
                 case 4:
                     PlaySound("TIMERUP");
+                    popUpManager.Visible();
+                    popUpManager.popUpText.text = "Timer +5 secs";
                     timeManager.currentTime += 5.0f;
                     if(timeManager.currentTime > 60.0f)
                     {

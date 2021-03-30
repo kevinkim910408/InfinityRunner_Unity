@@ -78,9 +78,9 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = moveSpeed * speedMultiplier;
 
                 // max speed
-                if (moveSpeed > 15)
+                if (moveSpeed > 10)
                 {
-                    moveSpeed = 15;
+                    moveSpeed = 10;
                 }
             }
 
