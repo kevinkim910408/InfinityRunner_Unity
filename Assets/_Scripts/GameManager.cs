@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
 
         timeManager.isTimeDecrease = true;
         timeManager.currentTime = 60;
+        thePlayer.life = 1;
+
+
     }
    
 

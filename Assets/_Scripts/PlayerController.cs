@@ -28,6 +28,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpTime;
     [SerializeField] int jumpCount;
 
+    [Header("Life")]
+    [SerializeField] public int life = 1;
+
     // boolean
     private bool isJumpig = false;
     public bool isDead;
@@ -161,11 +164,22 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("DeathPlane"))
         {
-            PlaySound("DIE");
-            moveSpeed = moveSpeedStore;
-            speedIncreaseMilestone = speedIncreaseMilestoneStore;
-            speedMilestoneCount  = speedMilestoneCountStore;
-            gameManager.LoseCondition();
+            if (life == 2)
+            {
+                Debug.Log("Life = 2");
+                collision.gameObject.SetActive(false);
+            }
+            life -= 1;
+            
+            
+            if(life == 0)
+            {
+                PlaySound("DIE");
+                moveSpeed = moveSpeedStore;
+                speedIncreaseMilestone = speedIncreaseMilestoneStore;
+                speedMilestoneCount = speedMilestoneCountStore;
+                gameManager.LoseCondition();
+            }
         }
     }
 }

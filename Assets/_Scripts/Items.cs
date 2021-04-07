@@ -32,7 +32,7 @@ public class Items : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rand = Random.Range(0, 5);
+        rand = Random.Range(0, 6);
     }
 
     public void PlaySound(string action)
@@ -99,6 +99,18 @@ public class Items : MonoBehaviour
                         timeManager.currentTime = 60.0f;
                     }
                     Debug.Log("Timer Up");
+                    break;
+
+                case 5:
+                    PlaySound("TIMERUP");
+                    popUpManager.Visible();
+                    popUpManager.popUpText.text = "Shiled Up! (+ 1 life, Maximum 2)";
+                    playerController.life++;
+                    if (playerController.life >= 2)
+                    {
+                        playerController.life = 2;
+                    }
+                    Debug.Log("Shiled Up!");
                     break;
             }
         }

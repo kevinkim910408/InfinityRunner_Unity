@@ -6,12 +6,14 @@ using UnityEngine;
 public class SpikePatrol : MonoBehaviour
 {
     Rigidbody rigid;
+    PlayerController playerController;
     public float moveSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
