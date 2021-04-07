@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Life")]
     [SerializeField] public int life = 1;
+    [SerializeField] public GameObject shield = null;
 
     // boolean
     private bool isJumpig = false;
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
 
+        shield.SetActive(false);
         isDead = false;
         jumpParticle = Instantiate(jumpParticlePrefab, jumpParticleSpawnPoint.transform.position, Quaternion.identity);
     }
@@ -67,6 +69,14 @@ public class PlayerController : MonoBehaviour
     {
         Run();
         Jump();
+        if(life >=2)
+        {
+            shield.SetActive(true);
+        }
+        if(life < 2)
+        {
+            shield.SetActive(false);
+        }
     }
 
 

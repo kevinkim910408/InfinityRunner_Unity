@@ -32,7 +32,7 @@ public class Items : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rand = Random.Range(0, 6);
+        rand = Random.Range(0, 8);
     }
 
     public void PlaySound(string action)
@@ -60,7 +60,6 @@ public class Items : MonoBehaviour
             animator.SetBool("isInteracted", true);
             switch (rand)
             {
-                // 40%
                 case 0:
                 case 1:
                     popUpManager.Visible();
@@ -74,7 +73,6 @@ public class Items : MonoBehaviour
                     Debug.Log("Speed Down");
                     break;
 
-                    // 20%
                 case 2:
                     PlaySound("SPEEDUP");
                     popUpManager.Visible();
@@ -87,7 +85,6 @@ public class Items : MonoBehaviour
                     Debug.Log("Speed Up");
                     break;
 
-                  //  40%
                 case 3:
                 case 4:
                     PlaySound("TIMERUP");
@@ -102,9 +99,11 @@ public class Items : MonoBehaviour
                     break;
 
                 case 5:
+                case 6:
+                case 7:
                     PlaySound("TIMERUP");
                     popUpManager.Visible();
-                    popUpManager.popUpText.text = "Shiled Up! (+ 1 life, Maximum 2)";
+                    popUpManager.popUpText.text = "Shiled Up! ";
                     playerController.life++;
                     if (playerController.life >= 2)
                     {
